@@ -1,21 +1,132 @@
+Day: 1--->Wage: 80
+Day: 2--->Wage: 0
+Day: 3--->Wage: 160
+Day: 4--->Wage: 160
+Day: 5--->Wage: 160
+Day: 6--->Wage: 80
+Day: 7--->Wage: 0
+Day: 8--->Wage: 0
+Day: 9--->Wage: 80
+Day: 10--->Wage: 160
+Day: 11--->Wage: 160
+Day: 12--->Wage: 0
+Day: 13--->Wage: 160
+Day: 14--->Wage: 80
+Day: 15--->Wage: 160
+Day: 16--->Wage: 80
+Day: 17--->Wage: 80
+Day: 18--->Wage: 0
+Day: 19--->Wage: 80
+Day: 20--->Wage: 0
+Employee Total Monthly Wage: 1680
+<---------------------------------------------------------->
+Day: 1--->Wage: 80
+Day: 2--->Wage: 0
+Day: 3--->Wage: 160
+Day: 4--->Wage: 80
+Day: 5--->Wage: 0
+Day: 6--->Wage: 80
+Day: 7--->Wage: 0
+Day: 8--->Wage: 0
+Day: 9--->Wage: 0
+Day: 10--->Wage: 160
+Day: 11--->Wage: 160
+Day: 12--->Wage: 80
+Day: 13--->Wage: 0
+Day: 14--->Wage: 0
+Day: 15--->Wage: 80
+Day: 16--->Wage: 0
+Day: 17--->Wage: 80
+Day: 18--->Wage: 0
+Day: 19--->Wage: 160
+Day: 20--->Wage: 80
+Employee Total Monthly Wage: 1200
+<---------------------------------------------------------->
 Day: 1--->Wage: 0
+Day: 2--->Wage: 160
+Day: 3--->Wage: 80
+Day: 4--->Wage: 0
+Day: 5--->Wage: 160
+Day: 6--->Wage: 160
+Day: 7--->Wage: 0
+Day: 8--->Wage: 0
+Day: 9--->Wage: 0
+Day: 10--->Wage: 160
+Day: 11--->Wage: 0
+Day: 12--->Wage: 80
+Day: 13--->Wage: 160
+Day: 14--->Wage: 160
+Day: 15--->Wage: 80
+Day: 16--->Wage: 160
+Day: 17--->Wage: 80
+Day: 18--->Wage: 80
+Day: 19--->Wage: 0
+Day: 20--->Wage: 160
+Employee Total Monthly Wage: 1680
+<---------------------------------------------------------->
+Day: 1--->Wage: 0
+Day: 2--->Wage: 80
+Day: 3--->Wage: 80
+Day: 4--->Wage: 160
+Day: 5--->Wage: 160
+Day: 6--->Wage: 0
+Day: 7--->Wage: 0
+Day: 8--->Wage: 0
+Day: 9--->Wage: 160
+Day: 10--->Wage: 0
+Day: 11--->Wage: 80
+Day: 12--->Wage: 160
+Day: 13--->Wage: 80
+Day: 14--->Wage: 160
+Day: 15--->Wage: 0
+Day: 16--->Wage: 80
+Day: 17--->Wage: 80
+Day: 18--->Wage: 80
+Day: 19--->Wage: 80
+Day: 20--->Wage: 160
+Employee Total Monthly Wage: 1600
+<---------------------------------------------------------->
+Day: 1--->Wage: 80
 Day: 2--->Wage: 0
 Day: 3--->Wage: 0
 Day: 4--->Wage: 80
-Day: 5--->Wage: 80
-Day: 6--->Wage: 80
+Day: 5--->Wage: 0
+Day: 6--->Wage: 160
 Day: 7--->Wage: 80
-Day: 8--->Wage: 80
+Day: 8--->Wage: 160
 Day: 9--->Wage: 0
-Day: 10--->Wage: 80
-Day: 11--->Wage: 160
-Day: 12--->Wage: 160
-Day: 13--->Wage: 80
+Day: 10--->Wage: 160
+Day: 11--->Wage: 0
+Day: 12--->Wage: 80
+Day: 13--->Wage: 160
 Day: 14--->Wage: 80
 Day: 15--->Wage: 160
 Day: 16--->Wage: 80
 Day: 17--->Wage: 0
 Day: 18--->Wage: 160
 Day: 19--->Wage: 0
-Day: 20--->Wage: 80
-Employee Total Monthly Wage: 1440
+Day: 20--->Wage: 160
+Employee Total Monthly Wage: 1600
+<---------------------------------------------------------->
+Day: 1--->Wage: 0
+Day: 2--->Wage: 80
+Day: 3--->Wage: 80
+Day: 4--->Wage: 160
+Day: 5--->Wage: 80
+Day: 6--->Wage: 80
+Day: 7--->Wage: 80
+Day: 8--->Wage: 160
+Day: 9--->Wage: 0
+Day: 10--->Wage: 80
+Day: 11--->Wage: 80
+Day: 12--->Wage: 0
+Day: 13--->Wage: 160
+Day: 14--->Wage: 0
+Day: 15--->Wage: 0
+Day: 16--->Wage: 80
+Day: 17--->Wage: 0
+Day: 18--->Wage: 0
+Day: 19--->Wage: 160
+Day: 20--->Wage: 0
+Employee Total Monthly Wage: 1280
+<---------------------------------------------------------->
