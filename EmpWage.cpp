@@ -20,11 +20,14 @@ struct CalculateEmpWage
         	int totalEmpHrs = 0;
         	int totalWage = 0;
         	int dayWage = 0;
+		int months;
 
+		cout << "Enter Months: " << endl;
+		cin >> months;
         	cout << "Welcome To Employee Wage Computation Problem" << endl;
         	srand( time(0) );
 
-        	while( totalEmpHrs < MAX_HRS_MONTH && totalWorkingDays < MONTH_TOTAL_WORKING_DAYS )
+        	while( totalEmpHrs < MAX_HRS_MONTH * months && totalWorkingDays < MONTH_TOTAL_WORKING_DAYS * months )
         	{
                 	totalWorkingDays++;
                 	int checkAttendance = rand() % 3 + 1;
