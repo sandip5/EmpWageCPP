@@ -5,14 +5,19 @@ using namespace std;
 
 int main()
 {
+	const int IS_PRESENT = 1;
+	const int EMP_RATE_PER_HR = 20;
+	const int EMP_HRS = 8;
+	int dailyWage = 0;
 	cout << "Welcome To Employee Wage Computation Problem" << endl;
 	srand( time(0) );
 	int checkAttendance = rand() % 2 + 1;
-	if( checkAttendance == 1 )
+	if( IS_PRESENT == checkAttendance )
 	{
-		cout << "Employee Is Present" << endl;
+		dailyWage = EMP_RATE_PER_HR * EMP_HRS;
+		cout << "Employee Daily Wagre: " << dailyWage << endl;
 	}
-	else if( checkAttendance == 2 )
+	else
 	{
 		cout << "Employee Is Absent" << endl;
 	}
