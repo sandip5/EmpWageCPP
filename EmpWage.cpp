@@ -11,23 +11,32 @@ struct CalculateEmpWage
 	{
 		const int IS_FULL_TIME = 1;
         	const int IS_PART_TIME = 2;
-        	const int EMP_RATE_PER_HR = 20;
-        	const int MONTH_TOTAL_WORKING_DAYS = 20;
-        	const int MAX_HRS_MONTH = 100;
+        	
+		int wagePerHr;
+		cout << "Enter Company Per Hour Wage: " << endl;
+		cin >> wagePerHr;
+
+        	int monthTotalWorkingDays;
+		cout << "Enter Number Of Working Days: " << endl;
+		cin >> monthTotalWorkingDays;
+
+        	int maxHoursPerMonth;
+		cout << "Enter Maximum Hours For Month: " << endl;
+		cin >> maxHoursPerMonth;
 
         	int totalWorkingDays = 0;
         	int empHrs = 0;
         	int totalEmpHrs = 0;
         	int totalWage = 0;
         	int dayWage = 0;
-		int months;
 
+		int months;
 		cout << "Enter Months: " << endl;
 		cin >> months;
-        	cout << "Welcome To Employee Wage Computation Problem" << endl;
+        	
         	srand( time(0) );
 
-        	while( totalEmpHrs < MAX_HRS_MONTH * months && totalWorkingDays < MONTH_TOTAL_WORKING_DAYS * months )
+        	while( totalEmpHrs < maxHoursPerMonth * months && totalWorkingDays < monthTotalWorkingDays * months )
         	{
                 	totalWorkingDays++;
                 	int checkAttendance = rand() % 3 + 1;
@@ -46,7 +55,7 @@ struct CalculateEmpWage
                 	}
 
                 	totalEmpHrs = totalEmpHrs + empHrs;
-                	dayWage = empHrs * EMP_RATE_PER_HR;
+                	dayWage = empHrs * wagePerHr;
 
                 	fstream fileStream;
                 	fileStream.open("emp_wage.txt", ios::out | ios::app);
@@ -58,7 +67,7 @@ struct CalculateEmpWage
                 	}
         	}
 
-        	totalWage = totalEmpHrs * EMP_RATE_PER_HR;
+        	totalWage = totalEmpHrs * wagePerHr;
 
         	fstream fileStream;
         	fileStream.open("emp_wage.txt", ios::out | ios::app);
