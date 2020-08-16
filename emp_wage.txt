@@ -1,0 +1,21 @@
+Day: 1--->Wage: 0
+Day: 2--->Wage: 0
+Day: 3--->Wage: 0
+Day: 4--->Wage: 80
+Day: 5--->Wage: 80
+Day: 6--->Wage: 80
+Day: 7--->Wage: 80
+Day: 8--->Wage: 80
+Day: 9--->Wage: 0
+Day: 10--->Wage: 80
+Day: 11--->Wage: 160
+Day: 12--->Wage: 160
+Day: 13--->Wage: 80
+Day: 14--->Wage: 80
+Day: 15--->Wage: 160
+Day: 16--->Wage: 80
+Day: 17--->Wage: 0
+Day: 18--->Wage: 160
+Day: 19--->Wage: 0
+Day: 20--->Wage: 80
+Employee Total Monthly Wage: 1440

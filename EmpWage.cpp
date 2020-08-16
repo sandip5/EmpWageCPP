@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <fstream>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ int main()
 	int empHrs = 0;
 	int totalEmpHrs = 0;
 	int totalWage = 0;
+	int dayWage = 0;
 
 	cout << "Welcome To Employee Wage Computation Problem" << endl;
 	srand( time(0) );
@@ -38,9 +40,29 @@ int main()
 		}
 		
 		totalEmpHrs = totalEmpHrs + empHrs;
+		dayWage = empHrs * EMP_RATE_PER_HR;
+
+		fstream fileStream;
+		fileStream.open("emp_wage.txt", ios::out | ios::app);
+		
+		if(fileStream.is_open()) 
+		{
+			fileStream << "Day: " << totalWorkingDays << "--->" << "Wage: " << dayWage << endl;
+			fileStream.close();
+		}
 	}
 
 	totalWage = totalEmpHrs * EMP_RATE_PER_HR;
+	
+	fstream fileStream;
+        fileStream.open("emp_wage.txt", ios::out | ios::app);
+
+        if(fileStream.is_open())
+        {
+                fileStream << "Employee Total Monthly Wage: " << totalWage << endl;
+                fileStream.close();
+        }
+
 	cout << "Employee Total Wage: " << totalWage << endl;
 	return 0;
 }
