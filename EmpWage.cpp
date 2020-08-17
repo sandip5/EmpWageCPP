@@ -7,29 +7,30 @@ using namespace std;
 
 struct CalculateEmpWage
 {
+	const int IS_FULL_TIME = 1;
+        const int IS_PART_TIME = 2;
+        	
+	string companyName;
+	int wagePerHr;
+        int monthTotalWorkingDays;
+        int maxHoursPerMonth;
+
+	CalculateEmpWage( string companyName, int wagePerHr, int monthTotalWorkingDays, int maxHoursPerMonth )
+	{
+		this -> companyName = companyName;
+		this -> wagePerHr = wagePerHr;
+		this -> monthTotalWorkingDays = monthTotalWorkingDays;
+		this -> maxHoursPerMonth = maxHoursPerMonth;
+	}
+
+        int totalWorkingDays = 0;
+        int empHrs = 0;
+        int totalEmpHrs = 0;
+        int totalWage = 0;
+        int dayWage = 0;
+
 	void calculate()
 	{
-		const int IS_FULL_TIME = 1;
-        	const int IS_PART_TIME = 2;
-        	
-		int wagePerHr;
-		cout << "Enter Company Per Hour Wage: " << endl;
-		cin >> wagePerHr;
-
-        	int monthTotalWorkingDays;
-		cout << "Enter Number Of Working Days: " << endl;
-		cin >> monthTotalWorkingDays;
-
-        	int maxHoursPerMonth;
-		cout << "Enter Maximum Hours For Month: " << endl;
-		cin >> maxHoursPerMonth;
-
-        	int totalWorkingDays = 0;
-        	int empHrs = 0;
-        	int totalEmpHrs = 0;
-        	int totalWage = 0;
-        	int dayWage = 0;
-
 		int months;
 		cout << "Enter Months: " << endl;
 		cin >> months;
@@ -80,16 +81,13 @@ struct CalculateEmpWage
         	}
 
         	cout << "Employee Total Wage: " << totalWage << endl;
-
 	}
 };
 
 int main()
 {
-	CalculateEmpWage emp1;
-	emp1.calculate();
-	sleep(2);
-	CalculateEmpWage emp2;
-	emp2.calculate();
+	CalculateEmpWage reliance( "Reliance", 20, 20, 100 ), dmart( "Dmart", 50, 28, 120 );
+	reliance.calculate();
+	dmart.calculate();
 	return 0;
 }
