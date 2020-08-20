@@ -163,6 +163,11 @@ void searchTotalWage(string companyName, vector<CompanyEmpWage> container)
 	}
 }
 
+void sortByMonthlyWage(vector<CompanyEmpWage> container)
+{
+
+}
+
 int main()
 {
 	fstream fileStream;
@@ -177,5 +182,7 @@ int main()
 	empWageAttendance.calculateEmpWage(empWage[1]);
 
 	searchTotalWage("Reliance", empWageAttendance.container);
+
+	sortByMonthlyWage(empWageAttendance.container);
 	return 0;
 }
