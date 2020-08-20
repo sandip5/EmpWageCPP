@@ -15,6 +15,7 @@ struct CompanyEmpWage
         int monthTotalWorkingDays;
         int maxHoursPerMonth;
 	int totalWage;
+	vector<int> storeDailyWage;
 
 	public:
 	void setDetails( string companyName, string employeeName, int wagePerHr, int monthTotalWorkingDays, int maxHoursPerMonth )
@@ -61,6 +62,16 @@ struct CompanyEmpWage
 	{
 		this -> totalWage = totalWage;
 	}
+
+	void setDailyWage(vector<int> storeDayWage)
+	{
+		this -> storeDailyWage = storeDayWage;
+	}
+	
+	vector<int> getDailyWage()
+	{
+		return storeDailyWage;
+	}
 };
 
 struct EmpWageAttendance
@@ -73,6 +84,8 @@ struct EmpWageAttendance
 
 	void calculateEmpWage(CompanyEmpWage companyEmpWage)
 	{
+		vector<int> storeDayWage;
+
 		const int IS_FULL_TIME = 1;
 	        const int IS_PART_TIME = 2;
 
@@ -113,6 +126,7 @@ struct EmpWageAttendance
 
                 	totalEmpHrs = totalEmpHrs + empHrs;
                 	dayWage = empHrs * companyEmpWage.getWagePerHr();
+			storeDayWage.push_back(dayWage);
 
                 	if(fileStream.is_open())
                 	{
@@ -124,6 +138,8 @@ struct EmpWageAttendance
         	totalWage = totalEmpHrs * companyEmpWage.getWagePerHr();
 		companyEmpWage.setTotalEmpWage(totalWage);
 
+		companyEmpWage.setDailyWage(storeDayWage);
+	
         	if(fileStream.is_open())
         	{
                 	fileStream << " " << "," << " " << "," << " " << "," << " " << "," << totalWage << endl;
