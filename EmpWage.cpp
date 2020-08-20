@@ -76,10 +76,10 @@ struct CompanyEmpWage
 
 struct EmpWageAttendance
 {
+	vector<CompanyEmpWage> container;
 	void addCompany(CompanyEmpWage companyEmpWage)
 	{
-		vector<CompanyEmpWage> container;
-		container.push_back(companyEmpWage);
+        	container.push_back(companyEmpWage);
 	}
 
 	void calculateEmpWage(CompanyEmpWage companyEmpWage)
@@ -151,6 +151,18 @@ struct EmpWageAttendance
 	}
 };
 
+void searchTotalWage(string companyName, vector<CompanyEmpWage> container)
+{
+	for(CompanyEmpWage it : container)
+	{
+		if(it.getCompanyName() == companyName)
+		{
+			cout << "Total Wage: " << it.getTotalWage() << endl;
+			break;
+		}
+	}
+}
+
 int main()
 {
 	fstream fileStream;
@@ -163,5 +175,7 @@ int main()
 	struct EmpWageAttendance empWageAttendance;
 	empWageAttendance.calculateEmpWage(empWage[0]);	
 	empWageAttendance.calculateEmpWage(empWage[1]);
+
+	searchTotalWage("Reliance", empWageAttendance.container);
 	return 0;
 }
