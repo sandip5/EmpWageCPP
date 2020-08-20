@@ -5,39 +5,88 @@
 
 using namespace std;
 
-struct CalculateEmpWage
+struct CompanyEmpWage
 {
-	const int IS_FULL_TIME = 1;
-        const int IS_PART_TIME = 2;
-        	
+	private:
+	string employeeName;
 	string companyName;
 	int wagePerHr;
         int monthTotalWorkingDays;
         int maxHoursPerMonth;
+	int totalWage;
 
-	CalculateEmpWage( string companyName, int wagePerHr, int monthTotalWorkingDays, int maxHoursPerMonth )
+	public:
+	void setDetails( string companyName, string employeeName, int wagePerHr, int monthTotalWorkingDays, int maxHoursPerMonth )
 	{
+		this -> employeeName = employeeName;
 		this -> companyName = companyName;
 		this -> wagePerHr = wagePerHr;
 		this -> monthTotalWorkingDays = monthTotalWorkingDays;
 		this -> maxHoursPerMonth = maxHoursPerMonth;
 	}
 
-        int totalWorkingDays = 0;
-        int empHrs = 0;
-        int totalEmpHrs = 0;
-        int totalWage = 0;
-        int dayWage = 0;
-
-	void calculate()
+	string getEmployeeName()
 	{
+		return employeeName;
+	}
+	
+        string getCompanyName()
+        {
+                return companyName;
+        }
+
+        int getWagePerHr()
+        {
+                return wagePerHr;
+        }
+
+        int getMonthTotalWorkingDays()
+        {
+                return monthTotalWorkingDays;
+        }
+
+        int getMaxHoursPerMonth()
+	{
+                return maxHoursPerMonth;
+        }
+
+        int getTotalWage()
+        {
+                return totalWage;
+        }
+
+
+	void setTotalEmpWage( int totalWage )
+	{
+		this -> totalWage = totalWage;
+	}
+};
+
+struct EmpWageAttendance
+{
+	void calculateEmpWage(CompanyEmpWage companyEmpWage)
+	{
+		const int IS_FULL_TIME = 1;
+	        const int IS_PART_TIME = 2;
+
+		int totalWorkingDays = 0;
+        	int empHrs = 0;
+        	int totalEmpHrs = 0;
+        	int totalWage = 0;
+        	int dayWage = 0;
+	
 		int months;
 		cout << "Enter Months: " << endl;
 		cin >> months;
         	
         	srand( time(0) );
 
-        	while( totalEmpHrs < maxHoursPerMonth * months && totalWorkingDays < monthTotalWorkingDays * months )
+		fstream fileStream;
+        	fileStream.open("emp_wage.csv", ios::out | ios::app);
+        	fileStream << "Day" << "," << "Company Name" << "," << "Employee Name" << "," << "Daily Wage" << "," << "Total Wage" << endl;
+
+      
+        	while( totalEmpHrs < companyEmpWage.getMaxHoursPerMonth() * months && totalWorkingDays < companyEmpWage.getMonthTotalWorkingDays() * months )
         	{
                 	totalWorkingDays++;
                 	int checkAttendance = rand() % 3 + 1;
@@ -56,27 +105,20 @@ struct CalculateEmpWage
                 	}
 
                 	totalEmpHrs = totalEmpHrs + empHrs;
-                	dayWage = empHrs * wagePerHr;
-
-                	fstream fileStream;
-                	fileStream.open("emp_wage.txt", ios::out | ios::app);
+                	dayWage = empHrs * companyEmpWage.getWagePerHr();
 
                 	if(fileStream.is_open())
                 	{
-                        	fileStream << "Day: " << totalWorkingDays << "--->" << "Wage: " << dayWage << endl;
-                        	fileStream.close();
+                        	fileStream << totalWorkingDays << "," << companyEmpWage.getCompanyName() << "," << companyEmpWage.getEmployeeName() << ","
+				 << dayWage << "," << " " << endl;
                 	}
         	}
 
-        	totalWage = totalEmpHrs * wagePerHr;
-
-        	fstream fileStream;
-        	fileStream.open("emp_wage.txt", ios::out | ios::app);
+        	totalWage = totalEmpHrs * companyEmpWage.getWagePerHr();
 
         	if(fileStream.is_open())
         	{
-                	fileStream << "Employee Total Monthly Wage: " << totalWage << endl;
-			fileStream << "<---------------------------------------------------------->" << endl;
+                	fileStream << " " << "," << " " << "," << " " << "," << " " << "," << totalWage << endl;
                 	fileStream.close();
         	}
 
@@ -86,8 +128,16 @@ struct CalculateEmpWage
 
 int main()
 {
-	CalculateEmpWage reliance( "Reliance", 20, 20, 100 ), dmart( "Dmart", 50, 28, 120 );
-	reliance.calculate();
-	dmart.calculate();
+	fstream fileStream;
+        fileStream.open("emp_wage.csv", ios::out | ios::trunc);
+
+	struct CompanyEmpWage empWage[2];
+	empWage[0].setDetails( "Reliance", "Sumeet", 20, 20, 100 );
+	empWage[1].setDetails( "Dmart", "Rani", 50, 28, 120 );
+
+	struct EmpWageAttendance empWageAttendance;
+	empWageAttendance.calculateEmpWage(empWage[0]);	
+	empWageAttendance.calculateEmpWage(empWage[1]);
+
 	return 0;
 }
