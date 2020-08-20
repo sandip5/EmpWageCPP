@@ -2,6 +2,7 @@
 #include <ctime>
 #include <fstream>
 #include <unistd.h>
+#include <vector>
 
 using namespace std;
 
@@ -64,6 +65,11 @@ struct CompanyEmpWage
 
 struct EmpWageAttendance
 {
+	void addCompany(CompanyEmpWage companyEmpWage)
+	{
+		vector<CompanyEmpWage> container;
+		container.push_back(companyEmpWage);
+	}
 	void calculateEmpWage(CompanyEmpWage companyEmpWage)
 	{
 		const int IS_FULL_TIME = 1;
@@ -115,6 +121,7 @@ struct EmpWageAttendance
         	}
 
         	totalWage = totalEmpHrs * companyEmpWage.getWagePerHr();
+		companyEmpWage.setTotalEmpWage(totalWage);
 
         	if(fileStream.is_open())
         	{
@@ -122,7 +129,8 @@ struct EmpWageAttendance
                 	fileStream.close();
         	}
 
-        	cout << "Employee Total Wage: " << totalWage << endl;
+        	cout << "Employee Total Wage: " << companyEmpWage.getTotalWage() << endl;
+		addCompany(companyEmpWage);
 	}
 };
 
@@ -138,6 +146,5 @@ int main()
 	struct EmpWageAttendance empWageAttendance;
 	empWageAttendance.calculateEmpWage(empWage[0]);	
 	empWageAttendance.calculateEmpWage(empWage[1]);
-
 	return 0;
 }
