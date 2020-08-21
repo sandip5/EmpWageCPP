@@ -168,6 +168,18 @@ void sortByMonthlyWage(vector<CompanyEmpWage> container)
 
 }
 
+void searchEmployee(int wagePerHour, vector<CompanyEmpWage> container)
+{
+        for(CompanyEmpWage it : container)
+        {
+                if(it.getWagePerHr() == wagePerHour)
+                {
+                        cout << "Name Of Employee is: " << it.getEmployeeName() << ", Whose Wage is: "  << it.getWagePerHr() << endl;
+                        break;
+                }
+        }
+}
+
 int main()
 {
 	fstream fileStream;
@@ -184,5 +196,7 @@ int main()
 	searchTotalWage("Reliance", empWageAttendance.container);
 
 	sortByMonthlyWage(empWageAttendance.container);
+
+	searchEmployee(50, empWageAttendance.container);
 	return 0;
 }
