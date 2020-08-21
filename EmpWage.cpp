@@ -33,7 +33,7 @@ struct CompanyEmpWage
 	{
 		return employeeName;
 	}
-	
+
         string getCompanyName()
         {
                 return companyName;
@@ -74,7 +74,7 @@ struct CompanyEmpWage
 	{
 		this -> storeDailyWage = storeDayWage;
 	}
-	
+
 	vector<int> getDailyWage()
 	{
 		return storeDailyWage;
@@ -101,15 +101,15 @@ struct EmpWageAttendance
         	int totalEmpHrs = 0;
         	int totalWage = 0;
         	int dayWage = 0;
+    
 		int monthFactor = 1;
-	
+
         	srand( time(0) );
 
 		fstream fileStream;
         	fileStream.open("emp_wage.csv", ios::out | ios::app);
         	fileStream << "Day" << "," << "Company Name" << "," << "Employee Name" << "," << "Daily Wage" << "," << "Total Wage" << endl;
 
-      
         	while( totalEmpHrs < companyEmpWage.getMaxHoursPerMonth() * companyEmpWage.getMonths() &&
 			 totalWorkingDays < companyEmpWage.getMonthTotalWorkingDays() * companyEmpWage.getMonths() )
         	{
@@ -145,7 +145,7 @@ struct EmpWageAttendance
 		companyEmpWage.setTotalEmpWage(totalWage);
 
 		companyEmpWage.setDailyWage(storeDayWage);
-	
+
         	if(fileStream.is_open())
         	{
                 	fileStream << " " << "," << " " << "," << " " << "," << " " << "," << totalWage << endl;
@@ -210,6 +210,18 @@ void sortByMonthlyWage(vector<CompanyEmpWage> container, int sortMonth)
         printSortingMonthlyWage(container, sortMonth);
 }
 
+void searchEmployee(int wagePerHour, vector<CompanyEmpWage> container)
+{
+        for(CompanyEmpWage it : container)
+        {
+                if(it.getWagePerHr() == wagePerHour)
+                {
+                        cout << "Name Of Employee is: " << it.getEmployeeName() << ", Whose Wage is: "  << it.getWagePerHr() << endl;
+                        break;
+                }
+        }
+}
+
 int main()
 {
 	fstream fileStream;
@@ -220,7 +232,7 @@ int main()
 	empWage[1].setDetails( "Dmart", "Rani", 50, 28, 120, 12 );
 
 	struct EmpWageAttendance empWageAttendance;
-	empWageAttendance.calculateEmpWage(empWage[0]);	
+	empWageAttendance.calculateEmpWage(empWage[0]);
 	empWageAttendance.calculateEmpWage(empWage[1]);
 
 	searchTotalWage("Reliance", empWageAttendance.container);
@@ -230,5 +242,6 @@ int main()
 	cin >> sortMonth;
 
 	sortByMonthlyWage(empWageAttendance.container, sortMonth);
+
 	return 0;
 }
