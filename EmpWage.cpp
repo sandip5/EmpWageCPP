@@ -15,16 +15,18 @@ struct CompanyEmpWage
         int monthTotalWorkingDays;
         int maxHoursPerMonth;
 	int totalWage;
+	int months;
 	vector<int> storeDailyWage;
 
 	public:
-	void setDetails( string companyName, string employeeName, int wagePerHr, int monthTotalWorkingDays, int maxHoursPerMonth )
+	void setDetails( string companyName, string employeeName, int wagePerHr, int monthTotalWorkingDays, int maxHoursPerMonth, int months )
 	{
 		this -> employeeName = employeeName;
 		this -> companyName = companyName;
 		this -> wagePerHr = wagePerHr;
 		this -> monthTotalWorkingDays = monthTotalWorkingDays;
 		this -> maxHoursPerMonth = maxHoursPerMonth;
+		this -> months = months;
 	}
 
 	string getEmployeeName()
@@ -63,6 +65,11 @@ struct CompanyEmpWage
 		this -> totalWage = totalWage;
 	}
 
+	int getMonths()
+	{
+		return months;
+	}
+
 	void setDailyWage(vector<int> storeDayWage)
 	{
 		this -> storeDailyWage = storeDayWage;
@@ -94,11 +101,8 @@ struct EmpWageAttendance
         	int totalEmpHrs = 0;
         	int totalWage = 0;
         	int dayWage = 0;
+		int monthFactor = 1;
 	
-		int months;
-		cout << "Enter Months: " << endl;
-		cin >> months;
-        	
         	srand( time(0) );
 
 		fstream fileStream;
@@ -106,7 +110,8 @@ struct EmpWageAttendance
         	fileStream << "Day" << "," << "Company Name" << "," << "Employee Name" << "," << "Daily Wage" << "," << "Total Wage" << endl;
 
       
-        	while( totalEmpHrs < companyEmpWage.getMaxHoursPerMonth() * months && totalWorkingDays < companyEmpWage.getMonthTotalWorkingDays() * months )
+        	while( totalEmpHrs < companyEmpWage.getMaxHoursPerMonth() * companyEmpWage.getMonths() &&
+			 totalWorkingDays < companyEmpWage.getMonthTotalWorkingDays() * companyEmpWage.getMonths() )
         	{
                 	totalWorkingDays++;
                 	int checkAttendance = rand() % 3 + 1;
@@ -126,7 +131,8 @@ struct EmpWageAttendance
 
                 	totalEmpHrs = totalEmpHrs + empHrs;
                 	dayWage = empHrs * companyEmpWage.getWagePerHr();
-			storeDayWage.push_back(dayWage);
+			totalWage = totalEmpHrs * companyEmpWage.getWagePerHr();
+			storeDayWage.push_back(totalWage);
 
                 	if(fileStream.is_open())
                 	{
@@ -163,9 +169,45 @@ void searchTotalWage(string companyName, vector<CompanyEmpWage> container)
 	}
 }
 
-void sortByMonthlyWage(vector<CompanyEmpWage> container)
+void printSortingMonthlyWage(vector<CompanyEmpWage> container, int sortMonth)
 {
+	cout << "Company Name" << " : " << "Employee Name" << " : " << "Month" << " : " << "Wage" << endl;
 
+	for(int i = 0; i < container.size(); i++)
+	{
+		cout << container[i].getCompanyName() << " : " << container[i].getEmployeeName() << " : " << sortMonth << " : "
+			<< container[i].getDailyWage()[container[i].getMonthTotalWorkingDays() * sortMonth] << endl;
+	}
+}
+
+void sortByMonthlyWage(vector<CompanyEmpWage> container, int sortMonth)
+{
+	cout << "Before Sorting: " << endl;
+	printSortingMonthlyWage(container, sortMonth);
+	CompanyEmpWage temp;
+
+	for( int i = 0; i < container.size(); i++ )
+	{
+		int flag = 0;
+		for( int j = 0; j < container.size() - 1 - i ; j++ )
+		{
+			if( container[j].getDailyWage()[container[j].getMonthTotalWorkingDays() * sortMonth] <
+                        	container[j + 1].getDailyWage()[container[j + 1].getMonthTotalWorkingDays() * sortMonth] )
+			{
+				temp = container[j];
+				container[j] = container[j + 1];
+				container[j + 1] = temp;
+				flag = 1;
+			}
+		}
+		if(flag == 0) 
+		{
+			break;
+		}
+	}
+
+	cout << "After Sorting: " << endl;
+        printSortingMonthlyWage(container, sortMonth);
 }
 
 int main()
@@ -174,8 +216,8 @@ int main()
         fileStream.open("emp_wage.csv", ios::out | ios::trunc);
 
 	struct CompanyEmpWage empWage[2];
-	empWage[0].setDetails( "Reliance", "Sumeet", 20, 20, 100 );
-	empWage[1].setDetails( "Dmart", "Rani", 50, 28, 120 );
+	empWage[0].setDetails( "Reliance", "Sumeet", 20, 20, 100, 12 );
+	empWage[1].setDetails( "Dmart", "Rani", 50, 28, 120, 12 );
 
 	struct EmpWageAttendance empWageAttendance;
 	empWageAttendance.calculateEmpWage(empWage[0]);	
@@ -183,6 +225,10 @@ int main()
 
 	searchTotalWage("Reliance", empWageAttendance.container);
 
-	sortByMonthlyWage(empWageAttendance.container);
+	cout << "Select a Months In Between 1 to 12 For Which Month You Want To Sort Employees Monthly Wage: " << endl;
+	int sortMonth;
+	cin >> sortMonth;
+
+	sortByMonthlyWage(empWageAttendance.container, sortMonth);
 	return 0;
 }
