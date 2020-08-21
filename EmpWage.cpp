@@ -31,7 +31,7 @@ struct CompanyEmpWage
 	{
 		return employeeName;
 	}
-	
+
         string getCompanyName()
         {
                 return companyName;
@@ -67,7 +67,7 @@ struct CompanyEmpWage
 	{
 		this -> storeDailyWage = storeDayWage;
 	}
-	
+
 	vector<int> getDailyWage()
 	{
 		return storeDailyWage;
@@ -94,18 +94,18 @@ struct EmpWageAttendance
         	int totalEmpHrs = 0;
         	int totalWage = 0;
         	int dayWage = 0;
-	
+
 		int months;
 		cout << "Enter Months: " << endl;
 		cin >> months;
-        	
+
         	srand( time(0) );
 
 		fstream fileStream;
         	fileStream.open("emp_wage.csv", ios::out | ios::app);
         	fileStream << "Day" << "," << "Company Name" << "," << "Employee Name" << "," << "Daily Wage" << "," << "Total Wage" << endl;
 
-      
+
         	while( totalEmpHrs < companyEmpWage.getMaxHoursPerMonth() * months && totalWorkingDays < companyEmpWage.getMonthTotalWorkingDays() * months )
         	{
                 	totalWorkingDays++;
@@ -139,7 +139,7 @@ struct EmpWageAttendance
 		companyEmpWage.setTotalEmpWage(totalWage);
 
 		companyEmpWage.setDailyWage(storeDayWage);
-	
+
         	if(fileStream.is_open())
         	{
                 	fileStream << " " << "," << " " << "," << " " << "," << " " << "," << totalWage << endl;
@@ -165,6 +165,10 @@ void searchTotalWage(string companyName, vector<CompanyEmpWage> container)
 
 void sortByMonthlyWage(vector<CompanyEmpWage> container)
 {
+	for( int i =0; i< container.size(); i++)
+	{
+		cout << container[i].getEmployeeName() << endl;
+	}
 
 }
 
@@ -190,7 +194,7 @@ int main()
 	empWage[1].setDetails( "Dmart", "Rani", 50, 28, 120 );
 
 	struct EmpWageAttendance empWageAttendance;
-	empWageAttendance.calculateEmpWage(empWage[0]);	
+	empWageAttendance.calculateEmpWage(empWage[0]);
 	empWageAttendance.calculateEmpWage(empWage[1]);
 
 	searchTotalWage("Reliance", empWageAttendance.container);
