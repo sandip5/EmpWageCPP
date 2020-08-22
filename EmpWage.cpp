@@ -201,6 +201,7 @@ void printSortingMonthlyWage(vector<CompanyEmpWage> container, int sortMonth)
 void searchTotalWage(string companyName, vector<CompanyEmpWage> container)
 {
 	int companyTotalWage = 0;
+	cout << "================ Searching Result When We Input Company Name Provide Total Wage ===============" << endl;
 
 	for(CompanyEmpWage it : container)
 	{
@@ -213,9 +214,14 @@ void searchTotalWage(string companyName, vector<CompanyEmpWage> container)
 	cout << "Company Total Wage Of All Employees: " << companyTotalWage << endl;
 }
 
-void sortByMonthlyWage(vector<CompanyEmpWage> container, int sortMonth)
+void sortByMonthlyWage(vector<CompanyEmpWage> container)
 {
 	cout << "================================== Sort By Month Wage ===================================" << endl;
+
+        cout << "Select a Months In Between 1 to 12 For Which Month You Want To Sort Employees Monthly Wage: " << endl;
+        int sortMonth;
+        cin >> sortMonth;
+
 	cout << "Before Sorting: " << endl;
 	printSortingMonthlyWage(container, sortMonth);
 	CompanyEmpWage temp;
@@ -246,6 +252,8 @@ void sortByMonthlyWage(vector<CompanyEmpWage> container, int sortMonth)
 
 void searchEmployee(int wagePerHour, vector<CompanyEmpWage> container)
 {
+        cout << "========== Searching Result When We Input Wage Per Hour Provide Employee Name =========" << endl;
+
         for(CompanyEmpWage it : container)
         {
                 if(it.getWagePerHr() == wagePerHour)
@@ -298,39 +306,38 @@ void sortByDailyWage(vector<CompanyEmpWage> container)
         printSortingDailyWage(container);
 }
 
-int main()
+void writeFile()
 {
-	fstream fileStream;
+        fstream fileStream;
         fileStream.open("emp_wage.csv", ios::out | ios::trunc);
-	fileStream << "Day" << "," << "Company Name" << "," << "Employee Name" << "," << "Daily Wage" << "," << "Total Wage" << endl;
+        fileStream << "Day" << "," << "Company Name" << "," << "Employee Name" << "," << "Daily Wage" << "," << "Total Wage" << endl;
+}
 
-
-	struct CompanyEmpWage empWage[5];
-	empWage[0].setDetails( "Apple", "Employee One", 20, 20, 100, 12 );
-	empWage[1].setDetails( "Microsoft", "Employee Two", 50, 29, 120, 12 );
-	empWage[2].setDetails( "Amazon", "Employee Three", 15, 16, 190, 12 );
-	empWage[3].setDetails( "Google", "Employee Four", 100, 24, 148, 12 );
+void buildEmpWage()
+{
+        struct CompanyEmpWage empWage[5];
+        empWage[0].setDetails( "Apple", "Employee One", 20, 20, 100, 12 );
+        empWage[1].setDetails( "Microsoft", "Employee Two", 50, 29, 120, 12 );
+        empWage[2].setDetails( "Amazon", "Employee Three", 15, 16, 190, 12 );
+        empWage[3].setDetails( "Google", "Employee Four", 100, 24, 148, 12 );
         empWage[4].setDetails( "Google", "Employee Five", 50, 24, 148, 12 );
 
-	struct EmpWageBuilder empWageBuilder;
-	empWageBuilder.calculateEmpWage(empWage[0]);
-	empWageBuilder.calculateEmpWage(empWage[1]);
-	empWageBuilder.calculateEmpWage(empWage[2]);
-	empWageBuilder.calculateEmpWage(empWage[3]);
-	empWageBuilder.calculateEmpWage(empWage[4]);
+        struct EmpWageBuilder empWageBuilder;
+        empWageBuilder.calculateEmpWage(empWage[0]);
+        empWageBuilder.calculateEmpWage(empWage[1]);
+        empWageBuilder.calculateEmpWage(empWage[2]);
+        empWageBuilder.calculateEmpWage(empWage[3]);
+        empWageBuilder.calculateEmpWage(empWage[4]);
 
+        searchTotalWage("Google", empWageBuilder.container);
+        sortByMonthlyWage(empWageBuilder.container);
+        sortByDailyWage(empWageBuilder.container);
+        searchEmployee(50, empWageBuilder.container);
+}
 
-	cout << "============================== Searching Result When We Input Company Name Provide Total Wage ==============================" << endl;
-	searchTotalWage("Google", empWageBuilder.container);
-
-	cout << "Select a Months In Between 1 to 12 For Which Month You Want To Sort Employees Monthly Wage: " << endl;
-	int sortMonth;
-	cin >> sortMonth;
-
-	sortByMonthlyWage(empWageBuilder.container, sortMonth);
-	sortByDailyWage(empWageBuilder.container);
-
-        cout << "============================== Searching Result When We Input Wage Per Hour Provide Employee Name ==============================" << endl;
-	searchEmployee(50, empWageBuilder.container);
+int main()
+{
+	writeFile();
+	buildEmpWage();
 	return 0;
 }
