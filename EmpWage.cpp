@@ -240,6 +240,7 @@ void sortByMonthlyWage(vector<CompanyEmpWage> container, int sortMonth)
 
 	cout << "After Sorting: " << endl;
         printSortingMonthlyWage(container, sortMonth);
+<<<<<<< HEAD
 }
 
 
@@ -284,6 +285,8 @@ void sortByDailyWage(vector<CompanyEmpWage> container)
 
         cout << "After Sorting: " << endl;
         printSortingDailyWage(container);
+=======
+>>>>>>> 7a098fb743c6e77cb869399897f4a846f1db7d97
 }
 
 void searchEmployee(int wagePerHour, vector<CompanyEmpWage> container)
@@ -295,6 +298,49 @@ void searchEmployee(int wagePerHour, vector<CompanyEmpWage> container)
                         cout << "Name Of Employee is: " << it.getEmployeeName() << ", Whose Wage is: "  << it.getWagePerHr() << endl;
                 }
         }
+}
+
+void printSortingDailyWage(vector<CompanyEmpWage> container)
+{
+        cout << "Company Name" << " : " << "Employee Name" << " : " << "Daily Wage" << endl;
+
+        for(int i = 0; i < container.size(); i++)
+        {
+                cout << container[i].getCompanyName() << " : " << container[i].getEmployeeName() << " : "
+                        << container[i].getWagePerHr() * 8 << endl;
+        }
+}
+
+
+void sortByDailyWage(vector<CompanyEmpWage> container)
+{
+	cout << "================================== Sort By Daily Wage ===================================" << endl;
+        cout << "Before Sorting: " << endl;
+        printSortingDailyWage(container);
+        CompanyEmpWage temp;
+
+        for( int i = 0; i < container.size(); i++ )
+        {
+                int flag = 0;
+                for( int j = 0; j < container.size() - 1 - i ; j++ )
+                {
+                        if( container[j].getWagePerHr() <
+                                	container[j + 1].getWagePerHr() )
+                        {
+                                temp = container[j];
+                                container[j] = container[j + 1];
+                                container[j + 1] = temp;
+                                flag = 1;
+			}
+                }
+                if(flag == 0)
+                {
+                        break;
+                }
+        }
+
+        cout << "After Sorting: " << endl;
+        printSortingDailyWage(container);
 }
 
 int main()
@@ -316,6 +362,7 @@ int main()
 	empWageAttendance.calculateEmpWage(empWage[2]);
 	empWageAttendance.calculateEmpWage(empWage[3]);
 
+<<<<<<< HEAD
 	cout << "============================== Searching Result When We Input Company Name Provide Total Wage ==============================" << endl;
 	searchTotalWage("Google", empWageAttendance.container);
 
@@ -328,5 +375,18 @@ int main()
 
         cout << "============================== Searching Result When We Input Wage Per Hour Provide Employee Name ==============================" << endl;
 	searchEmployee(50, empWageAttendance.container);
+=======
+
+	searchTotalWage("Google", empWageAttendance.container);
+
+	cout << "Select a Months In Between 1 to 12 For Which Month You Want To Sort Employees Monthly Wage: " << endl;
+	int sortMonth;
+	cin >> sortMonth;
+
+	sortByMonthlyWage(empWageAttendance.container, sortMonth);
+
+	sortByDailyWage(empWageAttendance.container);
+
+>>>>>>> 7a098fb743c6e77cb869399897f4a846f1db7d97
 	return 0;
 }
