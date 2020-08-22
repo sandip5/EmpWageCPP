@@ -8,7 +8,7 @@ using namespace std;
 
 struct CompanyEmpWage
 {
-	private:
+private:
 	string employeeName;
 	string companyName;
 	int wagePerHr;
@@ -20,7 +20,7 @@ struct CompanyEmpWage
 	vector<int> storeDailyWage;
 	vector<int> monthWage;
 
-	public:
+public:
 	void setDetails( string companyName, string employeeName, int wagePerHr, int monthTotalWorkingDays, int maxHoursPerMonth, int months )
 	{
 		this -> employeeName = employeeName;
@@ -101,10 +101,9 @@ struct CompanyEmpWage
         {
                 return monthWage;
         }
-
 };
 
-struct EmpWageAttendance
+struct EmpWageBuilder
 {
 	vector<CompanyEmpWage> container;
 	void addCompany(CompanyEmpWage companyEmpWage)
@@ -201,13 +200,17 @@ void printSortingMonthlyWage(vector<CompanyEmpWage> container, int sortMonth)
 
 void searchTotalWage(string companyName, vector<CompanyEmpWage> container)
 {
+	int companyTotalWage = 0;
+
 	for(CompanyEmpWage it : container)
 	{
 		if(it.getCompanyName() == companyName)
 		{
-			cout << "Total Wage: " << it.getTotalWage() << endl;
+			companyTotalWage =companyTotalWage + it.getTotalWage();
 		}
 	}
+
+	cout << "Company Total Wage Of All Employees: " << companyTotalWage << endl;
 }
 
 void sortByMonthlyWage(vector<CompanyEmpWage> container, int sortMonth)
@@ -302,29 +305,32 @@ int main()
 	fileStream << "Day" << "," << "Company Name" << "," << "Employee Name" << "," << "Daily Wage" << "," << "Total Wage" << endl;
 
 
-	struct CompanyEmpWage empWage[4];
+	struct CompanyEmpWage empWage[5];
 	empWage[0].setDetails( "Apple", "Employee One", 20, 20, 100, 12 );
 	empWage[1].setDetails( "Microsoft", "Employee Two", 50, 29, 120, 12 );
 	empWage[2].setDetails( "Amazon", "Employee Three", 15, 16, 190, 12 );
 	empWage[3].setDetails( "Google", "Employee Four", 100, 24, 148, 12 );
+        empWage[4].setDetails( "Google", "Employee Five", 50, 24, 148, 12 );
 
-	struct EmpWageAttendance empWageAttendance;
-	empWageAttendance.calculateEmpWage(empWage[0]);
-	empWageAttendance.calculateEmpWage(empWage[1]);
-	empWageAttendance.calculateEmpWage(empWage[2]);
-	empWageAttendance.calculateEmpWage(empWage[3]);
+	struct EmpWageBuilder empWageBuilder;
+	empWageBuilder.calculateEmpWage(empWage[0]);
+	empWageBuilder.calculateEmpWage(empWage[1]);
+	empWageBuilder.calculateEmpWage(empWage[2]);
+	empWageBuilder.calculateEmpWage(empWage[3]);
+	empWageBuilder.calculateEmpWage(empWage[4]);
+
 
 	cout << "============================== Searching Result When We Input Company Name Provide Total Wage ==============================" << endl;
-	searchTotalWage("Google", empWageAttendance.container);
+	searchTotalWage("Google", empWageBuilder.container);
 
 	cout << "Select a Months In Between 1 to 12 For Which Month You Want To Sort Employees Monthly Wage: " << endl;
 	int sortMonth;
 	cin >> sortMonth;
 
-	sortByMonthlyWage(empWageAttendance.container, sortMonth);
-	sortByDailyWage(empWageAttendance.container);
+	sortByMonthlyWage(empWageBuilder.container, sortMonth);
+	sortByDailyWage(empWageBuilder.container);
 
         cout << "============================== Searching Result When We Input Wage Per Hour Provide Employee Name ==============================" << endl;
-	searchEmployee(50, empWageAttendance.container);
+	searchEmployee(50, empWageBuilder.container);
 	return 0;
 }
